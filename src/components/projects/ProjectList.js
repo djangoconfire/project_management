@@ -1,5 +1,7 @@
 import React from 'react';
 import ProjectSummary from './ProjectSummary'
+import { Link } from 'react-router-dom'
+
 
 const ProjectList = ({ projects, deleteProject}) => {
     return (
@@ -7,7 +9,9 @@ const ProjectList = ({ projects, deleteProject}) => {
             {
                 projects && projects.map(project => {
                     return (
-                        <ProjectSummary project={project} deleteProject={deleteProject} key={project.id}/>
+                        <Link to={'/project/' + project.id} key={project.id}>
+                            <ProjectSummary project={project} deleteProject={deleteProject}/>
+                        </Link>
                     )
                 })
             }

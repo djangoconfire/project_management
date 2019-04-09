@@ -7,7 +7,6 @@ const initialState = {
 }
 
 const projectReducer = (state=initialState , action) => {
-    console.log(action)
     switch(action.type){
         case 'CREATE_PROJECT' : {
             const newProjects = [...state.projects,action.project]
