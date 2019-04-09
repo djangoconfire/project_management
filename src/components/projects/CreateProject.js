@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { createProject } from '../../store/actions/projectActions'
+import { connect } from 'react-redux'
 
 class Project extends Component {
     state = {
@@ -7,7 +9,8 @@ class Project extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state)
+        this.props.createProject(this.state)
+        this.props.history.push('/')
     }
     handleChange = (e) => {
         this.setState({
@@ -16,6 +19,7 @@ class Project extends Component {
     }
 
   render() {
+      console.log(this.props)
     return (
       <div className="container">
           <form onSubmit={this.handleSubmit} className="white">
@@ -38,4 +42,10 @@ class Project extends Component {
   }
 }
 
-export default Project
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createProject : (project) => dispatch(createProject(project))
+    }
+}
+
+export default connect(() => {} ,mapDispatchToProps)(Project)
