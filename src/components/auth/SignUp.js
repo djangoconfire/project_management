@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { signUp } from '../../store/actions/authActions'
+import { Redirect }from 'react-router-dom'
 
 class SignUp extends Component {
     state = {
         email : '',
         password : '',
-        firstname : '',
-        lastname : ''
+        firstName : '',
+        lastName : ''
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
         console.log(this.state)
+        this.props.signUp(this.state)
     }
     handleChange = (e) => {
         this.setState({
@@ -19,6 +23,8 @@ class SignUp extends Component {
     }
 
   render() {
+      const { authError , auth } = this.props
+    //   if (auth.uid) return <Redirect to="/" />
     return (
       <div className="container">
           <form onSubmit={this.handleSubmit} className="white">
@@ -29,20 +35,23 @@ class SignUp extends Component {
             </div>
             <div className="input-field">
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" onChange={this.handleChange}/>
+                <input type="text" id="password" onChange={this.handleChange}/>
             </div>
 
             <div className="input-field">
-                <label htmlFor="firstname">FirstName</label>
-                <input type="text" id="firstname" onChange={this.handleChange}/>
+                <label htmlFor="firstName">FirstName</label>
+                <input type="text" id="firstName" onChange={this.handleChange}/>
             </div>
 
             <div className="input-field">
-                <label htmlFor="lastname">LastName</label>
-                <input type="text" id="lastname" onChange={this.handleChange}/>
+                <label htmlFor="lastName">LastName</label>
+                <input type="text" id="lastName" onChange={this.handleChange}/>
             </div>
             <div className="input-field">
                 <button className="btn pink lighten-1 z-depth-0">SignUp</button>
+                <div classname="redt-text">
+                    { authError ? <p>authEror</p> : null }
+                </div>
             </div>
           </form>
       </div>
@@ -50,4 +59,17 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp
+const mapStateToProps = (state) =>{
+    console.log(state)
+    return {
+
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signUp : (newUser) => dispatch(signUp(newUser))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SignUp)

@@ -10,7 +10,7 @@ class Project extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.createProject(this.state)
-        this.props.history.push('/')
+        // this.props.history.push('/')
     }
     handleChange = (e) => {
         this.setState({
@@ -48,4 +48,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(() => {} ,mapDispatchToProps)(Project)
+export default connect(null ,mapDispatchToProps)(Project)
